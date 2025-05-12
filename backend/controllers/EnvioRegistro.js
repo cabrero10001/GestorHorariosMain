@@ -5,14 +5,14 @@ const prisma = new PrismaClient();
 export const datosUser = async (req, res) => {
     const data = req.body;
     try {
-        const verificacion = await prisma.Users.findMany({
+        const verificacion = await prisma.user.findMany({
             where: { numeroDocumento: data.numeroDocumento }
         })
         if (verificacion.length > 0) {
             console.log("El usuario ya esta registrado en la base de datos")
             return res.status(500).json({mensaje : "El usuario ya existe en la base de datos"})
         } else {
-            const EnvioFormulario = await prisma.formularioRegistro.create(
+            const EnvioFormulario = await prisma.user.create(
                 {
                     data:{
                         primerNombre: data.primerNombre,

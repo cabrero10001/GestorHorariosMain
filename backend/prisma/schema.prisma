@@ -8,23 +8,24 @@ datasource db {
 }
 
 model User {
-  id                String       @id @default(uuid())
+  id                String       @default(uuid())
   primerNombre      String
   segundoNombre     String? 
   primerApellido    String
   segundoApellido   String
-  numeroDocumento   String       @unique
+  numeroDocumento   String       @id
   correo            String 
   area              String
   registros         Registros[]  // relación uno-a-muchos
 }
 
 model Registros {
-  id          String   @id @default(uuid())
-  horaE       DateTime @default(now())
-  horaS       DateTime @default(now())
-  usuarioId   String
-  usuario     User     @relation(fields: [usuarioId], references: [id]) // relación muchos-a-uno
+  id                String   @id @default(uuid())
+  horaE             DateTime? @default(now())
+  horaS             DateTime? @default(now())
+  // relación muchos-a-uno
+  numerodocumento            String
+  user    User @relation(fields: [numerodocumento], references: [numeroDocumento])
 }
 
 
