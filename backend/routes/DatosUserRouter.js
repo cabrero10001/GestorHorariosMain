@@ -3,6 +3,6 @@ import { datosCompletos } from '../controllers/DatosUser.js'
 
 const router = express.Router();
 
-router.post('/datosCompletos', datosCompletos);
+router.get('/datosCompletos', datosCompletos);
 
 export default router;

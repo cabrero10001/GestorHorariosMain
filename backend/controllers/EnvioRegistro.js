@@ -12,8 +12,7 @@ export const datosUser = async (req, res) => {
             console.log("El usuario ya esta registrado en la base de datos")
             return res.status(500).json({mensaje : "El usuario ya existe en la base de datos"})
         } else {
-            const EnvioFormulario = await prisma.user.create(
-                {
+            const EnvioFormulario = await prisma.user.create({
                     data:{
                         primerNombre: data.primerNombre,
                         segundoNombre: data.segundoNombre,
@@ -23,7 +22,10 @@ export const datosUser = async (req, res) => {
                         correo: data.correo,
                         area: data.area
                     }
-                })
+                });
+                return res.status(200).json({
+                    mensaje: "Datos obtenidos correctamente"
+                });
         }
     }
     catch (error) {
