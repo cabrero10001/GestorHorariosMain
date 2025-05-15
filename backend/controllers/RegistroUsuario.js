@@ -25,21 +25,37 @@ export const HoraUser = async (req, res) => {
             });
 
             if (verificacionDoc.length > 0) {
-                const salida = await prisma.registros.create({
-                    data: {
-                        horaS: FechaISO,
-                        user: {
-                            connect: {
-                                numeroDocumento: data.numeroDocumento
-                            }
-                        }
+                const registro = await prisma.registros.findFirst({
+                    where: {
+                        numeroDocumento: data.numeroDocumento,
+                        horaS: null
                     }
                 });
-                console.log("Salida Registrada");
-                return res.status(200).json({
-                    mensaje: "Hora de salida registrada",
-                    resultado: salida
-                });
+                if(registro){
+                    const salida = await prisma.registros.update({
+                        where:{
+                            id: registro.id,
+                            horaS: null
+                        },
+                        data: {
+                            horaS: FechaISO,
+                            user: {
+                                connect: {
+                                    numeroDocumento: data.numeroDocumento
+                                }
+                            }
+                        }
+                    });
+                    console.log("Salida Registrada");
+                    return res.status(200).json({
+                        mensaje: "Hora de salida registrada",
+                        resultado: salida
+                    });
+                }
+                else{
+                    console.log("No se encontró un registro que coincida");
+                }
+                
             } else {
                 const entrada = await prisma.registros.create({
                     data: {
