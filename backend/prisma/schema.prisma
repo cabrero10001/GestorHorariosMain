@@ -20,12 +20,12 @@ model User {
 }
 
 model Registros {
-  id                String   @id @default(uuid())
-  horaE             DateTime? @default(now())
-  horaS             DateTime? @default(now())
+  id                String    @id @default(uuid())
+  horaE             String?
+  horaS             String?
   // relación muchos-a-uno
-  numerodocumento            String
-  user    User @relation(fields: [numerodocumento], references: [numeroDocumento])
+  numeroDocumento            String
+  user    User @relation(fields: [numeroDocumento], references: [numeroDocumento])
 }
 
 
