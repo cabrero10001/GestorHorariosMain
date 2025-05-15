@@ -14,18 +14,34 @@ export const HoraUser = async (req, res) => {
             console.log("El usuario no esta registrado en la base de datos")
             return res.status(500).json({mensaje : "El usuario no existe en la base de datos"})
         } else {
-            const entrada = await prisma.registros.create({
-                data: {
-                    numerodocumento: data.numerodocumento,
-                    horaE : FechaISO,
-                    horaS: null
-                }
+            const verificacionDoc = await prisma.registros.findMany({
+                where: {numerodocumento: data.numerodocumento}
             });
-            console.log("Hora de entrada registrada")
-            return res.status(200).json({
-                mensaje: "Hora de entrada registrada",
-                resultado: entrada
-            });
+            if (verificacionDoc > 0){
+                const salida = await prisma.registros.create({
+                    data: {
+                        numerodocumento: data.numerodocumento,
+                        horaS: FechaISO
+                    }
+                });
+                console.log("Entrada Registrada");
+                return res.status(200).json({
+                    mensaje: "Hora de entrada registrada",
+                    resultado: salida
+                });
+            }
+            else {
+                const entrada = await prisma.registros.create({
+                    data: {
+                        horaE: FechaISO
+                    }
+                });
+                console.log("Salida Registrada");
+                return res.status(200).json({
+                    mensaje: "Hora de Salida registrada",
+                    resultado: entrada
+                });
+            }
         }
     }
     catch (error) {

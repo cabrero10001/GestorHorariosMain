@@ -3,6 +3,6 @@ import { HoraUser } from '../controllers/RegistroUsuario.js'
 
 const router = express.Router();
 
-router.post('/HoraUser', HoraUser);
+router.post('/RegistroHora', HoraUser);
 
 export default router;
