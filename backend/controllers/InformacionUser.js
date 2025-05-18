@@ -18,7 +18,7 @@ export const InfoComplete = async (req, res) => {
             }
         });
         const infoHoras = await prisma.registros.findFirst({
-            where: {numerodocumento: data.numerodocumento},
+            where: {numeroDocumento: data.numeroDocumento},
             select: {
                 horaE: true,
                 horaS: true

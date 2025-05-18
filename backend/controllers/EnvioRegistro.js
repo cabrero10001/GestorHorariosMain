@@ -24,7 +24,8 @@ export const datosUser = async (req, res) => {
                     }
                 });
                 return res.status(200).json({
-                    mensaje: "Datos obtenidos correctamente"
+                    mensaje: "Datos obtenidos correctamente",
+                    resultado: EnvioFormulario
                 });
         }
     }

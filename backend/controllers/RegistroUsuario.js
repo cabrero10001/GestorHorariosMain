@@ -53,7 +53,21 @@ export const HoraUser = async (req, res) => {
                     });
                 }
                 else{
-                    console.log("No se encontró un registro que coincida");
+                    const entrada = await prisma.registros.create({
+                        data: {
+                            horaE: FechaISO,
+                            user: {
+                                connect: {
+                                    numeroDocumento: data.numeroDocumento
+                                }
+                            }
+                        }
+                    });
+                    console.log("Nueva Entrada Registrada");
+                    return res.status(200).json({
+                        mensaje: "Hora de entrada registrada",
+                        resultado: entrada
+                    });
                 }
                 
             } else {
