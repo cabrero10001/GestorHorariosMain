@@ -23,6 +23,7 @@ export const datosUser = async (req, res) => {
                         area: data.area
                     }
                 });
+                console.log("Registro exitoso");
                 return res.status(200).json({
                     mensaje: "Datos obtenidos correctamente",
                     resultado: EnvioFormulario
