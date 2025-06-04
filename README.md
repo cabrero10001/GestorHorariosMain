@@ -70,7 +70,7 @@
 | POST | /api/EdicionUser | Actualizacion de datos user |
 | GET | /api/GetUsuarios | Informacion de usuarios |
 
-## Modelo de datos Prima
+## Modelo de base datos Prisma
 
 ```prisma
 model User {
