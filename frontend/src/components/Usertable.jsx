@@ -3,13 +3,8 @@ import axios from 'axios';
 
 export const UserTable = () => {
     const [usuarios, setUsuarios] = useState([]);
-
-    // Obtener datos al montar el componente
-    useEffect(() => {
-        axios.get('http://localhost:3000/api/GetUsuarios')
-            .then(res => setUsuarios(res.data))
-            .catch(err => console.error('Error al obtener usuarios:', err));
-    }, []);
+    
+    
 
     return (
         <div className="p-6">
@@ -60,17 +55,6 @@ export const UserTable = () => {
     function handleEditar(id) {
       // Aquí puedes abrir un modal o redirigir
         alert(`Editar usuario con ID ${id}`);
-    }
-
-    function handleEliminar(id) {
-      // Puedes hacer una petición DELETE al backend
-        if (confirm('¿Estás seguro de eliminar este usuario?')) {
-            axios.delete(`http://localhost:3000/api/DeleteUsuario/${id}`)
-            .then(() => {
-                setUsuarios(usuarios.filter(user => user.id !== id));
-            })
-            .catch(err => console.error('Error al eliminar:', err));
-        }
     }
 };
 
