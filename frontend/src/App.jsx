@@ -1,8 +1,9 @@
 import { Routes, Route } from 'react-router-dom'
-import { Index } from './pages/index';
+import { Dashboard } from './pages/Dashboard';
 import { Calendar } from './pages/Calendar';
 import { Users } from './pages/Users';
 import { Register } from './pages/Register';
+import { Index } from './pages/index';
 
 function App() {
 
@@ -10,6 +11,9 @@ function App() {
     <Routes>
       <Route path='/' element = {
           <Index />
+        } />
+      <Route path='/Dashboard' element = {
+          <Dashboard />
         } />
       <Route path='/Calendar' element ={
         <Calendar />

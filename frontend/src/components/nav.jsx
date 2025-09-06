@@ -1,12 +1,18 @@
 export const Nav = () => {
     return (
-        <header className=" w-[95%] mt-1 ml-[2.5%] rounded-2xl relative">
-                <h1 className="text-3xl p-5">Gestor de Horarios</h1>
-                <button className="bg-AzulLindo text-Fondo font-bold flex flex-row p-3 text-xl absolute top-3 right-10 rounded-2xl hover:bg-blue-900 cursor-pointer">
-                    <img src="\src\assets\img\user-solid.svg" alt="" className="w-4 mr-3" />
-                    Login
-                </button>
-                
-        </header>
+        <div className="flex">
+            <div className="flex items-center gap-1 mt-5 px-3 py-5 group">
+                <h1 className="text-2xl">Gestor de Horarios</h1>
+                <h1 className="text-2xl font-bold">GH</h1>
+                <span className="text-sm text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    ico
+                </span>
+            </div>
+
+            <ul className="flex ml-auto mr-25 mt-5">
+                <li className="mr-5">Home</li>
+                <li>About us</li>
+            </ul>
+        </div>
     )
 }
