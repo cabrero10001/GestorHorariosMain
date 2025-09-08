@@ -4,11 +4,12 @@
   --color-AzulLindo: #213555;
   --color-Fondo: #EEEEEE;
   --color-btnLogin1 : #F8FAFC;
-  --color-btnLogin2 : #1C6EA4;
+  --color-btnLogin2 : #09122C;
   --color-btnLogin3 : #133E87;
   --color-btnLogin3post : #1F509A;
 
-
-
-
+  --font-Pacifico: "Pacifico", sans-serif;
+  --font-Bropella: "Bropella", sans-serif;
+  --font-Caprasimo: "Caprasimo", sans-serif;
+  --font-Poppins: "Poppins", sans-serif;
 }
