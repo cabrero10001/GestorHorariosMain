@@ -2,12 +2,13 @@ import { Routes, Route } from 'react-router-dom'
 import { Dashboard } from './pages/Dashboard';
 import { Calendar } from './pages/Calendar';
 import { Users } from './pages/Users';
-import { Register } from './pages/Register';
+import { RegisterNew } from './pages/RegisterNew';
 import { Login } from './pages/Login';
+import { Register } from './pages/Register';
 import { Index } from './pages/Index';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
-
   return (
     <Routes>
       <Route path='/' element = {
@@ -16,17 +17,29 @@ function App() {
       <Route path='/Login' element = {
           <Login />
         } />
+      <Route path='/Register' element = {
+          <Register />
+        } />
+      {/* Rutas protegidas */}
       <Route path='/Dashboard' element = {
+        <PrivateRoute>
           <Dashboard />
+        </PrivateRoute>
         } />
       <Route path='/Calendar' element ={
-        <Calendar />
+        <PrivateRoute>
+          <Calendar />
+        </PrivateRoute>
       } />
       <Route path='/Users' element={
-        <Users />
+        <PrivateRoute>
+          <Users />
+        </PrivateRoute>
       }/>
-      <Route path='/Register' element={
-        <Register />
+      <Route path='/RegisterNew' element={
+        <PrivateRoute>
+          <RegisterNew />
+        </PrivateRoute>
       }/>
     </Routes>
   );

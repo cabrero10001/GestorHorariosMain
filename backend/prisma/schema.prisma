@@ -28,4 +28,9 @@ model Registros {
   user    User @relation(fields: [numeroDocumento], references: [numeroDocumento])
 }
 
+model UserLogin {
+  id_UserLogin String @id @default(uuid())
+  username String
+  password String
+}
 

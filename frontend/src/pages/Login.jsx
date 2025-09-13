@@ -1,47 +1,62 @@
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import { useState } from "react"
+import { useUserContext } from "../context/ContextUser"
+import Swal from "sweetalert2"
 
 export const Login = () => {
     const nav = useNavigate()
+    const { setUser, setLogueado } = useUserContext();
 
-    const {data, setUser, setLogueado} = useState({
-        username: '',
-        password: ''
-    });
+    const [data, setData] = useState({ username: '', password: '' });
 
     const handleChange = (e) => {
         setData({
-                ...data,
-                [e.target.name]: e.target.value
-            })
-
-        
+            ...data,
+            [e.target.name]: e.target.value
+        })
     };
-    
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const respuesta = await axios.post('API', data);
-            if (respuesta.status == 200) {
+            const respuesta = await axios.post('http://localhost:3000/api/Login', data);
+            if (respuesta.status === 200) {
                 setLogueado(true)
-                setUser(respuesta.data.user)
-                console.log(data)
-                console.log("logueo exitoso");
-                alert("SESION INICIADA")
-                nav("/")
+                setUser(respuesta.data.usuario)
+
+                Swal.fire({
+                    title: "¡Sesión iniciada!",
+                    text: "Bienvenido de nuevo 🚀",
+                    icon: "success",
+                    confirmButtonText: "Continuar",
+                    confirmButtonColor: "#2563eb", // azul tailwind
+                }).then(() => {
+                    nav("/Dashboard");
+                });
             }
         } catch (error) {
-            if (error.response?.status == 404) {
-                alert("El correo no se encuentra registrado")
-                console.log("el usuario no existe")
-                console.log(data)
-            } else if (error.response?.status == 401) {
-                alert("La contraseña es incorrecta")
-                console.log("la contraseña es incorrecta")
-                console.log(data)
+            if (error.response?.status === 404) {
+                Swal.fire({
+                    title: "Usuario no encontrado",
+                    text: "El nombre de usuario ingresado no se encuentra registrado",
+                    icon: "error",
+                    confirmButtonText: "Reintentar"
+                });
+            } else if (error.response?.status === 401) {
+                Swal.fire({
+                    title: "Contraseña incorrecta",
+                    text: "Verifica tus credenciales",
+                    icon: "warning",
+                    confirmButtonText: "Intentar de nuevo"
+                });
+            } else {
+                Swal.fire({
+                    title: "Error inesperado",
+                    text: "Intenta más tarde",
+                    icon: "error"
+                });
             }
-            
         }
     }
 
@@ -77,16 +92,14 @@ export const Login = () => {
                             className="bg-[#27374D] text-Fondo mt-5 p-3 pl-5 w-[60%] rounded-xl "
                             onChange={handleChange}
                             type="password" placeholder="Password" name="password"/>
-                        <h2 className="text-gray-400 mt-5">Don't have an account <a href="#" className="text-blue-500 hover:text-blue-700">Register</a></h2>
+                        <h2 className="text-gray-400 mt-5">Don't have an account <a onClick={() => nav("/Register")} className="text-blue-500 hover:text-blue-700 cursor-pointer">Register</a></h2>
                         <button 
                         type="submit"
-                        onClick={handleChange}
                         className="bg-blue-500 mt-[7%] p-2.5 w-[30%] rounded-xl cursor-pointer text-Fondo hover:bg-blue-700 hover:font-bold transition-all duration-300">
                             Log In</button>
                     </form>
                 </div>
             </div>
-
         </div>
     )
 }

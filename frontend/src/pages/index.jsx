@@ -17,7 +17,7 @@ export const Index = () => {
                     </p>
                     <div className="w-full my-[5%] ">
                         <BtnLogin 
-                            layer={"Login"}
+                            layer={"Ir al calendario"}
                             accion={() => nav("/Login")}
                         />
                     </div>
